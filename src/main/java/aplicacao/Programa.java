@@ -9,18 +9,23 @@ import dominio.Pessoa;
 public class Programa {
 
 	public static void main(String[] args) {		
-		Pessoa p1 = new Pessoa(null, "Carlos da Silva", "carlos@gmail.com");
-		Pessoa p2 = new Pessoa(null, "Joaquim Torres", "joaquim@gmail.com");
-		Pessoa p3 = new Pessoa(null, "Ana Maria", "ana@gmail.com");
+		//Pessoa p1 = new Pessoa(null, "Carlos da Silva", "carlos@gmail.com");
+		//Pessoa p2 = new Pessoa(null, "Joaquim Torres", "joaquim@gmail.com");
+		//Pessoa p3 = new Pessoa(null, "Ana Maria", "ana@gmail.com");
 		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("exemplo-jpa");
 		EntityManager em = emf.createEntityManager();
 		
 		em.getTransaction().begin();
-		em.persist(p1);
-		em.persist(p2);
-		em.persist(p3);
+		//em.persist(p1); //Inserir
+		
+		Pessoa p = em.find(Pessoa.class, 2); //Busca uma pessoa que o id seja igual a 2
+		
+		System.out.println(p);
+
 		em.getTransaction().commit();
+		em.close();
+		emf.close();		
 		
 		System.out.println("Pronto!");
 
